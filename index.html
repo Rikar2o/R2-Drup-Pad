@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/f81d4557ad.js" crossorigin="anonymous"></script>
+    <title>R2 Drum Kit</title>
+</head>
+<header>
+    <a href="#"><img src="utilidades/r2-removebg-preview.png" alt=""></a>
+    <nav>
+        <ul>
+            <li><a href="mailto:ragamez661@gmail.com">Contactar</a></li>
+            <li><a href="http://">Likending</a></li>
+            <li><a href="http://">Proyectos</a></li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <div class="panel">
+        <div class="grabar"><button type="button"><i class="fa-solid fa-record-vinyl"></i>Grabar</button></div>
+        <div class="guardar"><button type="button"><i class="fa-solid fa-floppy-disk"></i>Guardar</button></div>
+        <div class="reproducir"><button type="button"><i class="fa-solid fa-play"></i>Play</button></div>
+    </div>
+    <div class="keys">
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span clas="sound">deep</span>
+        </div>
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span clas="sound">hit</span>
+        </div>
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span clas="sound">impact</span>
+        </div>
+        <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span clas="sound">flute</span>
+        </div>
+        <div data-key="71" class="key">
+            <kbd>G</kbd>
+            <span clas="sound">spring</span>
+        </div>
+        <div data-key="72" class="key">
+            <kbd>H</kbd>
+            <span clas="sound">vinyl</span>
+        </div>
+        <div data-key="74" class="key">
+            <kbd>J</kbd>
+            <span clas="sound">wrong</span>
+        </div>
+        <div data-key="75" class="key">
+            <kbd>K</kbd>
+            <span clas="sound">kick</span>
+        </div>
+        <div data-key="76" class="key">
+            <kbd>L</kbd>
+            <span clas="sound">kick</span>
+        </div>
+    </div>
+    
+    <audio data-key="65" src="utilidades/mixkit-deep-dark-horror-drum-557.wav"></audio>
+    <audio data-key="83" src="utilidades/mixkit-drum-bass-hit-2294.wav"></audio>
+    <audio data-key="68" src="utilidades/mixkit-drum-deep-impact-563.wav"></audio>
+    <audio data-key="70" src="utilidades/mixkit-flute-alert-2307.wav"></audio>
+    <audio data-key="71" src="utilidades/mixkit-spring-metal-hit-2302.wav"></audio>
+    <audio data-key="72" src="utilidades/mixkit-vinyl-forward-and-back-fast-scratch-703.wav"></audio>
+    <audio data-key="74" src="utilidades/mixkit-wrong-answer-bass-buzzer-948.wav"></audio>
+    <audio data-key="75" src="utilidades/mixkit-drumming-jungle-music-2426.wav"></audio>
+    <audio data-key="76" src="utilidades/mixkit-melodical-flute-music-notification-2310.wav"></audio>
+
+<script>
+    window.addEventListener('keydown', function(e) {
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+        key.classList.add('playing');
+    }
+    });
+
+function eliminarTransicion(e) {
+    if (e.propertyName !== 'transform') {
+        return;
+    }
+    this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', eliminarTransicion));
+
+
+</script>
+</body>
+</html>
